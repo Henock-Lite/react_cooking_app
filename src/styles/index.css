@@ -1,0 +1,450 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 20px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Style du titre */
+h1 {
+  text-align: center;
+  color: #2d3748;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+  padding-bottom: 15px;
+}
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: -webkit-gradient(linear, left top, right top, from(#4299e1), to(#667eea));
+  background: linear-gradient(90deg, #4299e1, #667eea);
+  border-radius: 2px;
+}
+
+/* Style de l'input */
+input[type=text] {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: 0 auto 40px auto;
+  padding: 14px 20px 14px 45px;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+  background-color: white;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a0aec0' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  background-size: 16px 16px;
+}
+input[type=text]:focus {
+  border-color: #4299e1;
+  -webkit-box-shadow: 0 4px 15px rgba(66, 153, 225, 0.15);
+          box-shadow: 0 4px 15px rgba(66, 153, 225, 0.15);
+}
+input[type=text]::-webkit-input-placeholder {
+  color: #a0aec0;
+}
+input[type=text]::-moz-placeholder {
+  color: #a0aec0;
+}
+input[type=text]:-ms-input-placeholder {
+  color: #a0aec0;
+}
+input[type=text]::-ms-input-placeholder {
+  color: #a0aec0;
+}
+input[type=text]::placeholder {
+  color: #a0aec0;
+}
+
+.card {
+  min-height: 300px;
+  position: relative;
+}
+.card:has(.cardMeal:not(.Notfound)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+}
+.card:has(.Notfound:only-child) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+/* Message Notfound - MODIFIÉ pour centrage */
+.Notfound {
+  color: #ff4d4d;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 40px 30px;
+  background-color: #fff5f5;
+  border-radius: 12px;
+  border: 2px dashed #fed7d7;
+  max-width: 500px;
+  width: 100%;
+  -webkit-animation: fadeIn 0.5s ease;
+          animation: fadeIn 0.5s ease;
+  margin: 0 auto;
+}
+.Notfound:only-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.Notfound::before {
+  content: "🔍";
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 15px;
+  opacity: 0.7;
+}
+.Notfound p {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Style des cartes individuelles */
+.cardMeal {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-animation: fadeIn 0.5s ease forwards;
+          animation: fadeIn 0.5s ease forwards;
+  opacity: 0;
+  /* Badge catégorie */
+  /* Style de l'image */
+}
+.cardMeal:hover {
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: #4299e1;
+}
+.cardMeal::after {
+  content: attr(data-category);
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(66, 153, 225, 0.9);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+.cardMeal img {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: -webkit-transform 0.5s ease;
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+  border-bottom: 1px solid #e2e8f0;
+}
+.cardMeal:hover img {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+/* Style du contenu */
+.content-container {
+  padding: 20px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* Première ligne (catégorie/origine) */
+  /* Description avec limite de lignes */
+}
+.content-container h4 {
+  font-size: 1.3rem;
+  color: #2d3748;
+  margin-bottom: 8px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.content-container p:first-of-type {
+  color: #718096;
+  margin-bottom: 12px;
+  text-transform: capitalize;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+}
+.content-container p:first-of-type::before {
+  content: "📍";
+  font-size: 0.8rem;
+}
+.content-container p:last-of-type {
+  color: #4a5568;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  margin-bottom: 15px;
+  max-height: 4.8em;
+  overflow: hidden;
+  position: relative;
+}
+.content-container p:last-of-type::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 1.6em;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(70%, white));
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), white 70%);
+  pointer-events: none;
+}
+@supports (-webkit-line-clamp: 3) or (line-clamp: 3) {
+  .content-container p:last-of-type {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-height: none;
+  }
+  .content-container p:last-of-type::after {
+    display: none;
+  }
+}
+
+/* Animation de chargement des cartes */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+/* Délais d'animation pour chaque carte */
+.cardMeal:nth-child(1) {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+
+.cardMeal:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.cardMeal:nth-child(3) {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+.cardMeal:nth-child(4) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+.cardMeal:nth-child(5) {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
+.cardMeal:nth-child(6) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+.cardMeal:nth-child(7) {
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+
+.cardMeal:nth-child(8) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+.cardMeal:nth-child(9) {
+  -webkit-animation-delay: 0.9s;
+          animation-delay: 0.9s;
+}
+
+.cardMeal:nth-child(10) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.cardMeal:nth-child(11) {
+  -webkit-animation-delay: 1.1s;
+          animation-delay: 1.1s;
+}
+
+.cardMeal:nth-child(12) {
+  -webkit-animation-delay: 1.2s;
+          animation-delay: 1.2s;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .card:has(.cardMeal:not(.Notfound)) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+  h1::after {
+    width: 60px;
+  }
+  .card:has(.cardMeal:not(.Notfound)) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 18px;
+  }
+  input[type=text] {
+    max-width: 320px;
+    margin-bottom: 30px;
+  }
+  .content-container h4 {
+    font-size: 1.2rem;
+  }
+  .Notfound {
+    padding: 30px 20px;
+    font-size: 1.1rem;
+  }
+  .Notfound::before {
+    font-size: 2.5rem;
+  }
+  .Notfound p {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 640px) {
+  .card:has(.cardMeal:not(.Notfound)) {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 15px;
+  }
+  .cardMeal img {
+    height: 180px;
+  }
+  input[type=text] {
+    padding: 12px 15px 12px 40px;
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  .container {
+    padding: 0 15px;
+  }
+  .content-container {
+    padding: 16px;
+  }
+  .cardMeal::after {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+  .Notfound {
+    padding: 25px 15px;
+  }
+  .Notfound::before {
+    font-size: 2rem;
+  }
+  .Notfound p {
+    font-size: 1rem;
+  }
+}/*# sourceMappingURL=index.css.map */
